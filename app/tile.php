@@ -9,7 +9,7 @@
             }
 
     public function is_adjacent() {
-      return !! ($this->row == $this->puzzle->empty->row || $this->column == $this->puzzle->empty->column);
+      return !! (($this->row == $this->puzzle->empty->row && abs($this->column - $this->puzzle->empty->column) == 1) || ($this->column == $this->puzzle->empty->column && abs($this->row - $this->puzzle->empty->row) == 1));
     }
 
     public function swap() {

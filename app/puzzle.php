@@ -19,19 +19,6 @@
       return $puzzle_array;
     }
 
-    public function buildOrderedBoard() {
-      $numbers = range(1, 15);
-      $puzzle_array = array();
-
-      $row = 0;
-      while ($row <= 3){
-        array_push($puzzle_array, $this->buildRow(array_splice($numbers, 0, 4), $row));
-        $row++;
-      }
-      $puzzle_array[3][3] = $this->empty;
-      return $puzzle_array;
-    }
-
     public function find_tile_by_id($id){
       foreach ($this->flattened_board() as $tile){
         if ($tile->number == $id){

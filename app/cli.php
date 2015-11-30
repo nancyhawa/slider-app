@@ -12,18 +12,19 @@
         $tile = $this->puzzle->find_tile_by_id($choice);
 
         if (! ($tile)){
-          echo "That is not a valid choice.  Please enter the number of a tile.\n";
+          echo "\nThat is not a valid choice.  Please enter the number of a tile.\n";
         }elseif ($tile->is_adjacent()){
           $tile->swap();
         }else {
-          echo "That is tile is not adjacent to the empty space.\nChoose a tile that is directly beside, above, or below the empty space.\n";
+          echo "\nThat is tile is not adjacent to the empty space.\nChoose a tile that is directly beside, above, or below the empty space.\n";
         }
       }
-      echo "You won!  All of the tiles are in order!\n";
+      echo "\nYou won!  All of the tiles are in order!\n";
       $this->printBoard();
     }
 
     public function printBoard(){
+      echo "\n";
       foreach ($this->puzzle->board as $row){
         foreach ($row as $tile) {
           if ($tile === $this->puzzle->empty){
@@ -39,7 +40,7 @@
     }
 
     public function getUserChoice() {
-      $line = readline("Which tile would you like to move?\n");
+      $line = readline("\nWhich tile would you like to move?\n");
       return $line;
     }
   }
