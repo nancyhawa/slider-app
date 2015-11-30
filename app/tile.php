@@ -8,7 +8,6 @@
               $this->puzzle = $puzzle;
             }
 
-
     public function is_adjacent() {
       return !! ($this->row == $this->puzzle->empty->row || $this->column == $this->puzzle->empty->column);
     }
@@ -19,17 +18,14 @@
       $empty_row = $this->puzzle->empty->row;
       $empty_column = $this->puzzle->empty->column;
 
-      // reset coordinates of $tile
-      // reset coordinates of empty
-      // 
       $this->row = $empty_row;
       $this->column = $empty_column;
 
-      $this->puzzle->board[$tile_row][$tile_column] = $this->puzzle->empty;
+      $this->puzzle->empty->row = $tile_row;
+      $this->puzzle->empty->column = $tile_column;
+
       $this->puzzle->board[$empty_row][$empty_column] = $this;
+      $this->puzzle->board[$tile_row][$tile_column] = $this->puzzle->empty;
     }
-
   }
-
-
 ?>

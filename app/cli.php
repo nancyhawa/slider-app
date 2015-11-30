@@ -1,7 +1,4 @@
 <?php
-require 'app/puzzle.php';
-require 'app/tile.php';
-
   class CLI {
 
     public function __construct() {
@@ -23,7 +20,7 @@ require 'app/tile.php';
         }
       }
       echo "You won!  All of the tiles are in order!\n";
-      $this->printBoard;
+      $this->printBoard();
     }
 
     public function printBoard(){
@@ -46,6 +43,4 @@ require 'app/tile.php';
       return $line;
     }
   }
-
-  (new CLI())->run()
 ?>

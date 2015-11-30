@@ -1,13 +1,26 @@
 <?php
   class Puzzle {
     public function __construct() {
-      $this->empty = new Tile("", 3, 3, $this);
+      $this->empty = new Tile("16", 3, 3, $this);
       $this->board = $this->buildBoard();
             }
 
     public function buildBoard() {
       $numbers = range(1, 15);
       shuffle($numbers);
+      $puzzle_array = array();
+
+      $row = 0;
+      while ($row <= 3){
+        array_push($puzzle_array, $this->buildRow(array_splice($numbers, 0, 4), $row));
+        $row++;
+      }
+      $puzzle_array[3][3] = $this->empty;
+      return $puzzle_array;
+    }
+
+    public function buildOrderedBoard() {
+      $numbers = range(1, 15);
       $puzzle_array = array();
 
       $row = 0;
@@ -44,7 +57,10 @@
         }
       }
       $numbers_array = array_map("get_number", ($this->flattened_board()));
-      !! ($numbers_array == asort($numbers_array));
+      $sorted_array = array_map("get_number", ($this->flattened_board()));
+      sort($sorted_array);
+
+      return $numbers_array == $sorted_array;
     }
 
     function flattened_board() {
@@ -53,7 +69,4 @@
       return $return;
     }
   }
-
-
-
 ?>
