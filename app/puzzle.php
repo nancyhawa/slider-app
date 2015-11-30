@@ -1,6 +1,4 @@
 <?php
-// require 'app/tile.php';
-
   class Puzzle {
     public function __construct() {
       $this->empty = new Tile("", 3, 3, $this);
@@ -44,6 +42,17 @@
         }
         echo "| \n";
       }
+    }
+
+    public function in_order(){
+      $numbers_array = array_map("number", ($this->flattened_board()));
+      !! ($numbers_array == asort($numbers_array));
+    }
+
+    function flattened_board() {
+      $return = array();
+      array_walk_recursive($this->board, function($a) use (&$return) { $return[] = $a; });
+      return $return;
     }
   }
 

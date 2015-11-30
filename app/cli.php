@@ -9,9 +9,41 @@ require 'app/tile.php';
             }
 
     public function run() {
-      $this->puzzle->printBoard();
+      while (!($this->puzzle->in_order())){
+        $this->printBoard();
+        $choice = $this->getUserChoice();
+        $tile = Tile::find_by_id($choice);
+
+        if !! ($tile){
+          echo "That is not a valid choice.  Please enter the number of a tile.";
+        }elseif ($tile->is_adjacent()){
+          $tile->swap();
+        }else {
+          echo "That is tile is not adjacent to the empty space.\nChoose a tile that is directly beside, above, or below the empty space.";
+        }
+      }
+      echo "You won!  All of the tiles are in order!\n";
+      $this->printBoard;
     }
 
+    public function printBoard(){
+      foreach ($this->puzzle->board as $row){
+        foreach ($row as $tile) {
+          if ($tile === $this->empty){
+            echo "|  ";
+          }elseif ($tile->number < 10) {
+            echo "| " . $tile->number;
+          } else {
+            echo "|" . $tile->number;
+          }
+        }
+        echo "| \n";
+      }
+    }
+
+    public function getUserChoice() {
+      $line = readline("Which tile would you like to move?");
+    }
   }
 
   (new CLI())->run()

@@ -1,5 +1,4 @@
 <?php
-// require 'app/puzzle.php';
   class Tile {
 
     private $tiles = array();
@@ -20,8 +19,8 @@
       }
     }
 
-    public function is_adjacent($tile) {
-      !! ($tile.row == this.row || $tile.column == this.column);
+    public function is_adjacent() {
+      !! ($this->row == $this->puzzle->empty->row || $this->column == $this->puzzle->empty->column);
     }
 
     public function swap() {
