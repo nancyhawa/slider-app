@@ -19,33 +19,31 @@
       return $puzzle_array;
     }
 
+    public function find_tile_by_id($id){
+      foreach ($this->flattened_board() as $tile){
+        if ($tile->number == $id){
+          return $tile;
+        }
+      }
+    }
+
     public function buildRow($tile_nums, $row_num) {
       $column = 0;
       $row = array();
       while ($column <= count($tile_nums) - 1) {
-        array_push($row, new Tile($tile_nums[$column], $row, $column, $this));
+        array_push($row, new Tile($tile_nums[$column], $row_num, $column, $this));
         $column++;
       }
       return $row;
     }
 
-    public function printBoard(){
-      foreach ($this->board as $row){
-        foreach ($row as $tile) {
-          if ($tile === $this->empty){
-            echo "|  ";
-          }elseif ($tile->number < 10) {
-            echo "| " . $tile->number;
-          } else {
-            echo "|" . $tile->number;
-          }
-        }
-        echo "| \n";
-      }
-    }
-
     public function in_order(){
-      $numbers_array = array_map("number", ($this->flattened_board()));
+      if (!function_exists('get_number')){
+        function get_number($tile){
+          return $tile->number;
+        }
+      }
+      $numbers_array = array_map("get_number", ($this->flattened_board()));
       !! ($numbers_array == asort($numbers_array));
     }
 

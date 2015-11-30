@@ -1,26 +1,16 @@
 <?php
   class Tile {
 
-    private $tiles = array();
-
     public function __construct($number, $row, $column, $puzzle) {
               $this->number = $number;
               $this->row = $row;
               $this->column = $column;
               $this->puzzle = $puzzle;
-              array_push($this->tiles, $this);
             }
 
-    public static function find_by_id($id){
-      foreach ($this->tiles as $tile){
-        if ($tile.num == $id){
-          return $tile;
-        }
-      }
-    }
 
     public function is_adjacent() {
-      !! ($this->row == $this->puzzle->empty->row || $this->column == $this->puzzle->empty->column);
+      return !! ($this->row == $this->puzzle->empty->row || $this->column == $this->puzzle->empty->column);
     }
 
     public function swap() {
@@ -29,6 +19,9 @@
       $empty_row = $this->puzzle->empty->row;
       $empty_column = $this->puzzle->empty->column;
 
+      // reset coordinates of $tile
+      // reset coordinates of empty
+      // 
       $this->row = $empty_row;
       $this->column = $empty_column;
 
